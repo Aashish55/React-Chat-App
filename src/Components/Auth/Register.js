@@ -5,7 +5,13 @@ import { Link } from 'react-router-dom';
 import firebase from '../../firebase'
 import md5 from 'md5';
 
+
+
+
 class Register extends Component {
+
+
+
     state = {
         username: '',
         email: '',
@@ -17,9 +23,12 @@ class Register extends Component {
     };
 
 
+
     onChangeHandler = (event) => {
         this.setState({ [event.target.name]: event.target.value })
     }
+
+
 
     isFormValid() {
 
@@ -31,7 +40,6 @@ class Register extends Component {
             this.setState({ errors: errors.concat(error) });
             return false;
         } else if (!this.isPasswordValid(this.state)) {
-
             return false;
         } else {
             return true;
@@ -60,8 +68,11 @@ class Register extends Component {
         }
     }
 
+
+
     displayErrors = errors => errors.map((error, i) => <p key={i}>{error.message}</p>)
 
+    
 
     onSubmitHandler = (event) => {
         event.preventDefault();
