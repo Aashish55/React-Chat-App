@@ -18,7 +18,7 @@ import { setUser, clearUser } from './action';
 
 const store = createStore(rootReducer, composeWithDevTools())
 
-class Root extends React.Component {
+class Root extends React.Component { 
 
     componentDidMount() {
         console.log(this.props.isLoading)

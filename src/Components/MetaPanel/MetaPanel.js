@@ -1,14 +1,9 @@
-import React, { Component } from 'react';
+import React from "react";
 
-class MetaPanel extends Component {
-    state = {  }
-    render() { 
-        return ( 
-            <div>
-                MetaPanel
-            </div>
-         );
-    }
+class MetaPanel extends React.Component {
+  render() {
+    return <div>MetaPanel</div>;
+  }
 }
- 
+
 export default MetaPanel;

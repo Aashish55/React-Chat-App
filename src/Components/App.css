@@ -1,3 +1,30 @@
-.App{
-    
+html,
+body,
+.app {
+  height: 100vh;
+  background: #eee;
+  padding: 1em;
+}
+.messages{
+  height: 440px;
+  overflow-y: auto;
+
+}
+.messages__form{
+  position: fixed !important;
+  bottom: 1em;
+  margin-left: 320px !important;
+  left: 0;
+  right: 1em;
+  z-index: 200;
+}
+.messages__self{
+  border-left: 2px solid orange;
+  padding-left: 8px;
+
+}
+.messages__other{
+  border-right: 2px solid green;
+  padding-right: 8px;
+
 }
