@@ -60,7 +60,7 @@ class Messages extends React.Component {
 
         <MessagesHeader />
 
-        <Segment>
+        <Segment className='chatbox'>
           <Comment.Group className='messages'>
             {messages.length > 0 && messages.map(message =>
               <MessageComponent

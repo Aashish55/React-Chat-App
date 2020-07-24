@@ -3,7 +3,7 @@ import { Comment } from 'semantic-ui-react'
 import moment from 'moment'
 
 const isOwnMessage = (message, user) => {
-    return message.user.id === user.uid ? 'messages__self' : 'messages__other'
+    return message.user.id === user.uid ? 'messages__self' : ''
 }
 
 

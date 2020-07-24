@@ -6,8 +6,9 @@ body,
   padding: 1em;
 }
 .messages{
-  height: 440px;
-  overflow-y: auto;
+  height: 500px;
+  margin-right: -100px;
+  overflow-y: scroll;
 
 }
 .messages__form{
@@ -19,12 +20,11 @@ body,
   z-index: 200;
 }
 .messages__self{
-  border-left: 2px solid orange;
+  border-left: 2px solid #2ecc71;
   padding-left: 8px;
 
 }
-.messages__other{
-  border-right: 2px solid green;
-  padding-right: 8px;
+.chatbox{
+  background-color: green;
 
 }
