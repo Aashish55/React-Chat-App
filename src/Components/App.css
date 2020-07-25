@@ -24,7 +24,8 @@ body,
   padding-left: 8px;
 
 }
-.chatbox{
-  background-color: green;
 
+.message__image{
+  padding: 1em;
+  
 }
