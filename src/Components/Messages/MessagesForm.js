@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Segment, Button, Input, Form } from 'semantic-ui-react'
 import firebase from '../../firebase'
 import FileModal from './FileModal'
-import uuidv4 from 'uuid/v4'
+import uuidv4 from 'uuid/v4';
+import Progressbar from './Progressbar'
 
 class MessagesForm extends Component {
     state = {
@@ -27,7 +28,7 @@ class MessagesForm extends Component {
     }
 
 
-    createMessage = (fileUrl=null) => {
+    createMessage = (fileUrl = null) => {
         const message = {
             timestamp: firebase.database.ServerValue.TIMESTAMP,
             user: {
@@ -36,10 +37,10 @@ class MessagesForm extends Component {
                 avatar: this.state.user.photoURL
             },
         };
-        if(fileUrl!==null){
-            message['image']=fileUrl;
-        }else{
-            message['content']=this.state.message
+        if (fileUrl !== null) {
+            message['image'] = fileUrl;
+        } else {
+            message['content'] = this.state.message
         }
 
         return message;
@@ -76,7 +77,7 @@ class MessagesForm extends Component {
         },
             () => {
                 this.state.uploadTask.on('state_changed', snap => {
-                    const percentUploaded = Math.round((snap.bytesTransferred / snap.totalBypes) * 100)
+                    const percentUploaded = Math.round((snap.bytesTransferred / snap.totalBytes) * 100)
                     this.setState({ percentUploaded })
                 },
                     err => {
@@ -104,24 +105,24 @@ class MessagesForm extends Component {
             }
         )
     };
-    
-    sendFileMessage=(fileUrl, ref, pathToUpload) =>{
-        ref.child(pathToUpload).push().set(this.createMessage(fileUrl)).then(()=>{
-            this.setState({uploadState:'done'})
+
+    sendFileMessage = (fileUrl, ref, pathToUpload) => {
+        ref.child(pathToUpload).push().set(this.createMessage(fileUrl)).then(() => {
+            this.setState({ uploadState: 'done' })
         })
-        .catch(err => {
-            console.log(err)
-            this.setState({
-                errors: this.state.errors.concat(err),
-                
+            .catch(err => {
+                console.log(err)
+                this.setState({
+                    errors: this.state.errors.concat(err),
+
+                })
             })
-        })
     }
 
 
 
     render() {
-        const { errors, message, loading, modal } = this.state
+        const { errors, message, loading, modal, uploadState, percentUploaded } = this.state
         return (
             <Segment className='messages__form'>
                 <Form onSubmit={this.sendMessage}>
@@ -141,12 +142,16 @@ class MessagesForm extends Component {
                     <Button.Group icon widths='2'>
                         <Button color='orange' content='Add a Reply..' disabled={loading} onClick={this.sendMessage} labelPosition='left' icon='edit'></Button>
                         <Button color='teal' content='Upload Media' onClick={this.openModal} labelPosition='right' icon='cloud upload'></Button>
-                        <FileModal
-                            modal={modal}
-                            closeModal={this.closeModal}
-                            uploadFile={this.uploadFile}
-                        />
                     </Button.Group>
+                    <FileModal
+                        modal={modal}
+                        closeModal={this.closeModal}
+                        uploadFile={this.uploadFile}
+                    />
+                    <Progressbar 
+                        uploadState={uploadState}
+                        percentUploaded={percentUploaded}
+                    />
                 </Form>
             </Segment>
         );
