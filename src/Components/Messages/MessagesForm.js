@@ -141,7 +141,7 @@ class MessagesForm extends Component {
                     />
                     <Button.Group icon widths='2'>
                         <Button color='orange' content='Add a Reply..' disabled={loading} onClick={this.sendMessage} labelPosition='left' icon='edit'></Button>
-                        <Button color='teal' content='Upload Media' onClick={this.openModal} labelPosition='right' icon='cloud upload'></Button>
+                        <Button color='teal' content='Upload Media' disabled={uploadState==='uploading'} onClick={this.openModal} labelPosition='right' icon='cloud upload'></Button>
                     </Button.Group>
                     <FileModal
                         modal={modal}

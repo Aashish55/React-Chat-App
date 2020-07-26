@@ -35,8 +35,17 @@ class Messages extends React.Component {
         messages: loadedMessages,
         messageLoading: false
       })
+      this.countUniqueUsers(loadedMessages)
     })
   }
+
+  countUniqueUsers = messages => {
+    const uniqueUsers = messages.reduce((acc,message)=>{
+      
+    },[])
+  }
+
+  displayChannelName = channel => channel ? `# ${channel.name}` : '';
 
   render() {
 
@@ -45,7 +54,9 @@ class Messages extends React.Component {
     return (
       <React.Fragment>
 
-        <MessagesHeader />
+        <MessagesHeader
+          channelName={this.displayChannelName(channel)}
+        />
 
         <Segment className='chatbox'>
           <Comment.Group className='messages'>
