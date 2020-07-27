@@ -13,6 +13,7 @@ class Messages extends React.Component {
     user: this.props.currentUser,
     messages: [],
     messageLoading: true,
+    numUniqueUsers:''
   }
 
   componentDidMount() {
@@ -41,21 +42,28 @@ class Messages extends React.Component {
 
   countUniqueUsers = messages => {
     const uniqueUsers = messages.reduce((acc,message)=>{
-      
+      if(!acc.includes(message.user.name)){
+        acc.push(message.user.name)
+      }
+      return acc;
     },[])
+    const plural = uniqueUsers.length>1 || uniqueUsers.length===0;
+    const numUniqueUsers = `${uniqueUsers.length} user${plural?'s':''}`;
+    this.setState({numUniqueUsers})
   }
 
   displayChannelName = channel => channel ? `# ${channel.name}` : '';
 
   render() {
 
-    const { messagesRef, messages, channel, user } = this.state
+    const { messagesRef, messages, channel, user, numUniqueUsers } = this.state
 
     return (
       <React.Fragment>
 
         <MessagesHeader
           channelName={this.displayChannelName(channel)}
+          numUniqueUsers={numUniqueUsers}
         />
 
         <Segment className='chatbox'>
